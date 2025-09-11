@@ -19,8 +19,6 @@ jobs:
           - os: windows-latest
             rid: win-x86
           - os: macos-latest
-            rid: maccatalyst-x64
-          - os: macos-latest
             rid: maccatalyst-arm64
 
 
