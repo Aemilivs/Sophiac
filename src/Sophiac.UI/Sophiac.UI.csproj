@@ -55,11 +55,11 @@
       <CreatePackage>true</CreatePackage>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.19041'">
-      <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
+    <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.19041.0'">
+      <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
     </PropertyGroup>
     
-    <ItemGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.19041'">
+    <ItemGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.19041.0'">
       <PackageReference Include="Microsoft.NETCore.App.Runtime.Mono.win-x64" Version="9.0.0-preview.7.24405.7" />
     </ItemGroup>
     
