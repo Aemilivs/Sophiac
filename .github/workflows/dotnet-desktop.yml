@@ -20,9 +20,9 @@ jobs:
           - os: windows-latest
             rid: win-x86
             framework: net9.0-windows10.0.19041
-          - os: macos-latest
-            rid: maccatalyst-arm64
-            framework: net9.0-maccatalyst
+          # - os: macos-latest
+          #   rid: maccatalyst-arm64
+          #   framework: net9.0-maccatalyst
 
 
     env:
