@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net9.0-windows10.0.19041</TargetFrameworks>
+        <TargetFrameworks>net9.0-windows10.0.19041;net9.0-maccatalyst</TargetFrameworks>
         <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
         <SelfContained>true</SelfContained>
         <SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
@@ -13,8 +13,6 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <EnableDefaultCssItems>false</EnableDefaultCssItems>
         <Nullable>enable</Nullable>
-
-        
 
         <!-- Display name -->
         <ApplicationTitle>Sophiac</ApplicationTitle>
@@ -38,45 +36,28 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.19041'">
-      <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
+    <!-- https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/errors-warnings#warninglevel -->
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+      <WarningLevel>4</WarningLevel> 
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-maccatalyst'">
-      <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
-      <MtouchUseLlvm>False</MtouchUseLlvm>
-      <AotAssemblies>True</AotAssemblies>
-      <UseInterpreter>true</UseInterpreter>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-ios|AnyCPU'">
-      <CreatePackage>false</CreatePackage>
-      <CodesignKey>iPhone Developer</CodesignKey>
-      <DeviceSpecificBuild>true</DeviceSpecificBuild>
-      <MtouchVerbosity>2</MtouchVerbosity>
-      <MtouchInterpreter>all</MtouchInterpreter>
-      <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-ios|AnyCPU'">
-      <CreatePackage>false</CreatePackage>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-      <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-maccatalyst|AnyCPU'">
-      <CreatePackage>false</CreatePackage>
+      <RuntimeIdentifiers>maccatalyst-arm64;maccatalyst-x64</RuntimeIdentifiers>
       <CodesignKey>Mac Developer</CodesignKey>
       <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
-      <AndroidManifest>AndroidManifest.xml</AndroidManifest>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-windows10.0.19041.0|AnyCPU'">
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-maccatalyst|AnyCPU'">
       <CreatePackage>false</CreatePackage>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-windows10.0.19041.0|AnyCPU'">
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-maccatalyst|AnyCPU'">
       <CreatePackage>true</CreatePackage>
     </PropertyGroup>
+
+    <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.19041'">
+      <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
+    </PropertyGroup>
+    
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-windows10.0.19041.0|AnyCPU'">
       <CreatePackage>false</CreatePackage>
     </PropertyGroup>
@@ -146,5 +127,4 @@
       <Content Include="TestSets\TestSetsPage.razor.css" />
       <Content Include="Questions\View\MultipleChoicesQuestionViewComponent.razor.css" />
     </ItemGroup>
-
 </Project>
