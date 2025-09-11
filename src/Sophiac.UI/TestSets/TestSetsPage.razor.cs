@@ -3,10 +3,13 @@ using Sophiac.Domain.TestSets;
 using System.Text;
 using CommunityToolkit.Maui.Storage;
 using CommunityToolkit.Maui.Alerts;
-using PDFIndexer.Utils;
 using Sophiac.Domain.Questions;
 using System.Text.Json;
 using Sophiac.Domain.Generation;
+using UglyToad.PdfPig;
+using UglyToad.PdfPig.DocumentLayoutAnalysis.TextExtractor;
+using UglyToad.PdfPig.Content;
+using UglyToad.PdfPig.DocumentLayoutAnalysis.WordExtractor;
 
 namespace Sophiac.UI.TestSets;
 
@@ -38,7 +41,13 @@ public partial class TestSetsPage : ComponentBase
 
     private IList<TestSet> _sets;
 
-    protected override async void OnInitialized()
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTestSetsAsync();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task LoadTestSetsAsync()
     {
         var sets = await QuestionsService.ReadTestSetsAsync();
         _sets = sets.ToList();
@@ -204,12 +213,13 @@ public partial class TestSetsPage : ComponentBase
             {
                 await Toast.Make("Processing PDF might take some time.").Show();
 
-                var extractor = new TextExtractor();
-                var text = extractor.ExtractFullText(file.FullPath);
+                var textInput = ExtractText(file.FullPath);
 
                 await QuestionsService.CreateTestSetAsync(file.FileName);
-                var cancellationToken = CancellationTokenSource.Token;
-                await GenerationService.GenerateQuestionAsync(file.FileName, text, cancellationToken);
+
+                var processCancellationToken = CancellationTokenSource.Token;
+                await GenerationService.GenerateQuestionAsync(file.FileName, textInput, processCancellationToken);
+
                 var set = await QuestionsService.ReadTestSetAsync(file.FileName);
                 await QuestionsService.UpdateTestSetAsync(set);
 
@@ -234,6 +244,24 @@ public partial class TestSetsPage : ComponentBase
         {
             IsLoading = false;
             StateHasChanged();
+        }
+    }
+
+    private string ExtractText(string filePath)
+    {
+        var pages = ExtractWordsOfPages(filePath);
+        return pages.SelectMany(word => word).Select(it => string.Concat(it.Text, ' ')).Aggregate(string.Concat);
+    }
+
+    private IEnumerable<IEnumerable<Word>> ExtractWordsOfPages(string filePath)
+    {
+        using (PdfDocument document = PdfDocument.Open(filePath))
+        {
+            foreach (var page in document.GetPages())
+            {
+                string text = ContentOrderTextExtractor.GetText(page);
+                yield return page.GetWords(NearestNeighbourWordExtractor.Instance);
+            }
         }
     }
 }

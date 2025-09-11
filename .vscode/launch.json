@@ -8,8 +8,7 @@
             "name": "C#: Sophiac.UI",
             "type": "dotnet",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/src/Sophiac.UI/Sophiac.UI.csproj",
-            "launchConfigurationId": "00008103-001139E23CEB001E"
+            "projectPath": "${workspaceFolder}/src/Sophiac.UI/Sophiac.UI.csproj"
         }
     ]
 }

@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 src/Sophiac.UI/.DS_Store
 src/Sophiac.UI/.DS_Store
+src/.DS_Store
