@@ -16,11 +16,13 @@ namespace Sophiac.Infrastructure.Repositories
 
         public async Task<IEnumerable<TestSet>> GetAllAsync()
         {
+            _context.ChangeTracker.Clear();
             return await _testSets.ToListAsync();
         }
 
         public async Task<TestSet?> GetByTitleAsync(string title)
         {
+            _context.ChangeTracker.Clear();
             return await _testSets.FirstOrDefaultAsync(ts => ts.Title == title);
         }
 
@@ -53,9 +55,10 @@ namespace Sophiac.Infrastructure.Repositories
                 throw new InvalidOperationException("There is no such test set to update!");
             }
 
-            existingTestSet.SingleChoiceQuestions = testSet.SingleChoiceQuestions;
-            existingTestSet.MultipleChoiceQuestions = testSet.MultipleChoiceQuestions;
-            existingTestSet.MappingQuestions = testSet.MappingQuestions;
+            existingTestSet.SingleChoiceQuestions.Concat(testSet.SingleChoiceQuestions);
+            existingTestSet.MultipleChoiceQuestions.Concat(testSet.MultipleChoiceQuestions);
+            existingTestSet.MappingQuestions.Concat(testSet.MappingQuestions);
+            _context.Update(existingTestSet);
             await _context.SaveChangesAsync();
         }
 

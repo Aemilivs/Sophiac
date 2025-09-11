@@ -80,14 +80,14 @@ else
             {
                 case SingleChoiceQuestion singleChoiceQuestion:
                     <SingleChoiceQuestionExecutionComponent Question="singleChoiceQuestion" Run="_run"
-                        PostAnswerAction="PostAnswerAction" Watch="_watch"></SingleChoiceQuestionExecutionComponent>
+                        PostAnswerAction="PostAnswerActionAsync" Watch="_watch"></SingleChoiceQuestionExecutionComponent>
                     break;
                 case MultipleChoicesQuestion multipleChoicesQuestion:
                     <MultipleChoicesQuestionExecutionComponent Question="multipleChoicesQuestion" Run="_run"
-                        PostAnswerAction="PostAnswerAction" Watch="_watch"></MultipleChoicesQuestionExecutionComponent>
+                        PostAnswerAction="PostAnswerActionAsync" Watch="_watch"></MultipleChoicesQuestionExecutionComponent>
                     break;
                 case MappingQuestion mappingQuestion:
-                    <MappingQuestionExecutionComponent Question="mappingQuestion" Run="_run" PostAnswerAction="PostAnswerAction"
+                    <MappingQuestionExecutionComponent Question="mappingQuestion" Run="_run" PostAnswerAction="PostAnswerActionAsync"
                         Watch="_watch"></MappingQuestionExecutionComponent>
                     break;
                 default:

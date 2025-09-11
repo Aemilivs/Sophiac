@@ -27,7 +27,7 @@
                 API Key
             </div>
             <div class="settings-openai-key-input">
-                <InputText @bind-Value="_key" @oninput="@SaveKeyAsync"></InputText>
+                <InputText @bind-Value="_key" @oninput="@OnKeyChangeAsync"></InputText>
             </div>
         </div>
     </div>
@@ -43,4 +43,38 @@
             </div>
         </div>
     }
+
+    <div class="settings-advanced-options">
+        <div class="settings-advanced-toggle">
+            <button @onclick="() => AdvancedOptions = !AdvancedOptions" class="btn btn-secondary">
+                @(AdvancedOptions ? "Hide" : "Show") Advanced Options
+            </button>
+        </div>
+        @if (AdvancedOptions)
+        {
+            <div class="settings-advanced-options-window-size">
+                <div class="settings-advanced-options-window-size-title">
+                    LLM Window Size
+                </div>
+                <div class="settings-advanced-options-window-size-description">
+                    The size of a window that input text is broken into (in sentences)
+                </div>
+                <div class="settings-advanced-options-window-size-input">
+                    <InputText @bind-Value="_window_size" @oninput="@OnWindowSizeChangeAsync"></InputText>
+                </div>
+            </div>
+            <div class="settings-advanced-options-custom-instructions">
+                <div class="settings-advanced-options-custom-instructions-title">
+                    Custom Instruction
+                </div>
+                <div class="settings-advanced-options-custom-instructions-description">
+                    A custom instruction that extends the system prompt for the LLM that parses input text.
+                </div>
+                <div class="settings-advanced-options-custom-instructions-input">
+                    <InputText class="wide-input" @bind-Value="_custom_instructions" @oninput="@OnCustomInstructionsChangeAsync"></InputText>
+                </div>
+            </div>
+        }
+    </div>
+
 </div>

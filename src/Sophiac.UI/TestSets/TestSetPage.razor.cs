@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using CommunityToolkit.Maui.Alerts;
+﻿using CommunityToolkit.Maui.Alerts;
 using Microsoft.AspNetCore.Components;
 using Sophiac.Domain.Questions;
 using Sophiac.Domain.TestSets;
@@ -42,38 +41,35 @@ public partial class TestSetPage : ComponentBase
 
         var type = arguments.Value.ToString();
 
-        if (type == typeof(SingleChoiceQuestion).Name)
+        switch (question)
         {
-            var singleChoiceQuestion =
+            case SingleChoiceQuestion:
+                var singleChoiceQuestion =
                 new SingleChoiceQuestion
                 {
                     Title = question.Title,
                     Description = question.Description
                 };
-            _set.SingleChoiceQuestions.Add(singleChoiceQuestion);
-        }
-
-        if (type == typeof(MultipleChoicesQuestion).Name)
-        {
-            var multipleChoicesQuestion =
+                _set.SingleChoiceQuestions.Add(singleChoiceQuestion);
+                break;
+            case MultipleChoicesQuestion:
+                var multipleChoicesQuestion =
                 new MultipleChoicesQuestion
                 {
                     Title = question.Title,
                     Description = question.Description
                 };
-            _set.MultipleChoiceQuestions.Add(multipleChoicesQuestion);
-        }
-
-
-        if (type == typeof(MappingQuestion).Name)
-        {
-            var mappingQuestion =
+                _set.MultipleChoiceQuestions.Add(multipleChoicesQuestion);
+                break;
+            case MappingQuestion:
+                var mappingQuestion =
                 new MappingQuestion
                 {
                     Title = question.Title,
                     Description = question.Description
                 };
-            _set.MappingQuestions.Add(mappingQuestion);
+                _set.MappingQuestions.Add(mappingQuestion);
+                break;
         }
 
         StateHasChanged();
@@ -82,7 +78,7 @@ public partial class TestSetPage : ComponentBase
     public void CreateQuestion()
     {
         var question = new SingleChoiceQuestion();
-        _set.SingleChoiceQuestions.Add(question);
+        _set.SingleChoiceQuestions.Insert(0, question);
         _questionTypes = _set.Questions.Select(it => it.GetType().Name).ToList();
     }
 

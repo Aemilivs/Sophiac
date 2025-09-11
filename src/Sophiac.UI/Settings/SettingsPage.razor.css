@@ -76,18 +76,72 @@
     }
 }
 
+.settings-advanced-options {
+    margin-top: 1rem;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.04);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.settings-advanced-options-window-size,
+.settings-advanced-options-custom-instructions {
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.settings-advanced-options-window-size-title,
+.settings-advanced-options-custom-instructions-title {
+    font-weight: 600;
+    color: var(--main-color);
+    margin-bottom: 0.25rem;
+}
+
+.settings-advanced-options-window-size-description,
+.settings-advanced-options-custom-instructions-description {
+    color: var(--main-color);
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.wide-input {
+  width: 100%;
+  height: 120px;
+  box-sizing: border-box;
+}
+
+.settings-advanced-options-window-size-input input,
+.settings-advanced-options-custom-instructions-input input {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 0.5rem;
+    width: 100%;
+    max-width: 32rem;
+    font-size: 1rem;
+    color: var(--main-color);
+    box-sizing: border-box;
+    min-height: 2.5em;
+    height: 5em;
+    /* ensure space for ~5 lines of text */
+    overflow: auto;
+}
+
+.settings-advanced-options-window-size-input input:focus,
+.settings-advanced-options-custom-instructions-input input:focus {
+    outline: none;
+    box-shadow: 0 0 5px var(--main-color);
+}
+
 
 @media (max-width: 600px) {
     .settings {
         width: 100%;
         padding: 10px;
     }
-
-
-
-
-
-
 
     .settings-title {
         font-size: 1.8rem;
@@ -99,5 +153,4 @@
     .settings-ollama-url-description {
         font-size: 1rem;
     }
-
 }

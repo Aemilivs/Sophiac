@@ -45,9 +45,8 @@ public partial class TestSetExecutionPage : ComponentBase
         _watch.Start();
     }
 
-    public void PostAnswerAction()
+    public async void PostAnswerActionAsync()
     {
-        _currentQuestion = _set.GetNextQuestion();
         if (_currentQuestion is SingleChoiceQuestion singleChoiceQuestion)
             _set.SingleChoiceQuestions.Remove(singleChoiceQuestion);
 
@@ -60,12 +59,21 @@ public partial class TestSetExecutionPage : ComponentBase
         if (_set.Questions.Any() == false)
         {
             _set.IsComplete = true;
+            StateHasChanged();
+        }
+        else
+        {
+            _currentQuestion = _set.GetNextQuestion();
         }
 
         StateHasChanged();
     }
 
-    public void RecordRun(TestRun run)
+    public async Task FinishRun()
+    {
+    }
+
+    public async Task RecordRun(TestRun run)
     {
         _watch.Reset();
         runsRepository.CreateTestRun(_run);

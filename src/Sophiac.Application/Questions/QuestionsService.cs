@@ -54,8 +54,13 @@ public class QuestionsService : IQuestionsService
             return;
         }
 
+        var questionExist = set.Questions.Any(it => string.Equals(it.Title, question.Title, StringComparison.OrdinalIgnoreCase));
+
+        if (questionExist)
+            return;
+
         if (question is SingleChoiceQuestion singleChoiceQuestion)
-            set.SingleChoiceQuestions.Add(singleChoiceQuestion);
+                set.SingleChoiceQuestions.Add(singleChoiceQuestion);
 
         if (question is MultipleChoicesQuestion multipleChoicesQuestion)
             set.MultipleChoiceQuestions.Add(multipleChoicesQuestion);

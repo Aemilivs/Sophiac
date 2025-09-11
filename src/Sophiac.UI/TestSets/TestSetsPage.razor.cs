@@ -34,6 +34,7 @@ public partial class TestSetsPage : ComponentBase
     public CancellationTokenSource CancellationTokenSource { get; set; } = new();
 
     public bool IsLoading { get; set; } = false;
+    public bool GenerationIsCancelled { get; set; } = false;
 
     private IList<TestSet> _sets;
 
@@ -127,6 +128,13 @@ public partial class TestSetsPage : ComponentBase
         }
     }
 
+    private async Task CancelGenerationAsync()
+    {
+        IsLoading = false;
+        GenerationIsCancelled = true;
+        CancellationTokenSource.Cancel();
+    }
+
     private async Task<PermissionStatus> CheckAndRequestStorageReadPermission()
     {
         PermissionStatus status = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
@@ -204,6 +212,13 @@ public partial class TestSetsPage : ComponentBase
                 await GenerationService.GenerateQuestionAsync(file.FileName, text, cancellationToken);
                 var set = await QuestionsService.ReadTestSetAsync(file.FileName);
                 await QuestionsService.UpdateTestSetAsync(set);
+
+                if (GenerationIsCancelled)
+                {
+                    GenerationIsCancelled = false;
+                    await QuestionsService.DeleteTestSet(file.FileName);
+                }
+
                 StateHasChanged();
             }
             else
