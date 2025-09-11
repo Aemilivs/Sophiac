@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net9.0-maccatalyst;net9.0-windows10.0.19041.0</TargetFrameworks>
+        <TargetFrameworks>net9.0-windows10.0.19041;net9.0-maccatalyst</TargetFrameworks>
+        <RuntimeIdentifiers>win-x64;win-x86;osx-x64;osx-arm64;maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
         <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
         <SelfContained>true</SelfContained>
         <SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
