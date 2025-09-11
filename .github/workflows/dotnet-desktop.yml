@@ -15,9 +15,14 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            rid: net9.0-windows10.0.19041
+            rid: win-x64
+            framework: net9.0-windows10.0.19041
+          - os: windows-latest
+            rid: win-x86
+            framework: net9.0-windows10.0.19041
           - os: macos-latest
-            rid: net9.0-maccatalyst
+            rid: maccatalyst-arm64
+            framework: net9.0-maccatalyst
 
 
     env:
@@ -37,10 +42,10 @@ jobs:
         run: dotnet workload install maui
 
       - name: Restore
-        run: dotnet restore ${{ env.SOLUTION_PATH }}
+        run: dotnet restore -r ${{matrix.rid}} ${{ env.SOLUTION_PATH }}
 
       - name: Publish
-        run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -o ${{ env.PUBLISH_DIR }} --self-contained false
+        run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -f ${{ matrix.framework }} -o ${{ env.PUBLISH_DIR }} --self-contained false
 
       - uses: actions/upload-artifact@v4
         with:
