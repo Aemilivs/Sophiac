@@ -41,9 +41,6 @@ jobs:
       - name: Restore
         run: dotnet restore ${{ env.SOLUTION_PATH }}
 
-      - name: Build
-        run: dotnet build ${{ env.SOLUTION_PATH }} -c Release --no-restore
-
       - name: Publish
         run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -o ${{ env.PUBLISH_DIR }} --self-contained false
 
