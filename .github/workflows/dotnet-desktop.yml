@@ -43,7 +43,7 @@ jobs:
         run: dotnet workload update
 
       - name: Restore
-        run: dotnet restore ${{ env.UI_PROJECT_PATH }} -r ${{ matrix.rid }} -f ${{ matrix.framework }} -o ${{ env.PUBLISH_DIR }}
+        run: dotnet restore ${{ env.UI_PROJECT_PATH }} -r ${{ matrix.rid }} -o ${{ env.PUBLISH_DIR }}
 
       - name: Publish
         run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -f ${{ matrix.framework }} -o ${{ env.PUBLISH_DIR }} --self-contained true -p:PublishTrimmed=true
