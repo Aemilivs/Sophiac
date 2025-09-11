@@ -42,7 +42,7 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-maccatalyst'">
-      <RuntimeIdentifiers>maccatalyst-arm64;maccatalyst-x64</RuntimeIdentifiers>
+      <RuntimeIdentifiers>maccatalyst-arm64</RuntimeIdentifiers>
       <CodesignKey>Mac Developer</CodesignKey>
       <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
     </PropertyGroup>
