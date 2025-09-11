@@ -39,7 +39,9 @@ jobs:
           cache: false
 
       - name: Install MAUI workload
-        run: dotnet workload install maui
+        run: 
+          dotnet workload install maui
+          dotnet workload update
 
       - name: Restore
         run: dotnet restore -r ${{matrix.rid}} ${{ env.SOLUTION_PATH }}
