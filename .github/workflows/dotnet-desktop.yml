@@ -17,7 +17,7 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            rid: win-x64
+            rid: win-x86
             framework: net9.0-windows10.0.19041
           # - os: macos-latest
           #   rid: maccatalyst-arm64
