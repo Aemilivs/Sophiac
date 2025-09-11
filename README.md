@@ -1,5 +1,13 @@
 # Sophiac
- An application intended to manage educational materials.
+Generate tests out of PDF files!
 
-#export PATH="$PATH:/Users/vadimemelin/.dotnet/tools"
-#export DOTNET_ROOT="/usr/local/share/dotnet/sdk"
+# Build process
+
+> You have to install [.NET 9 SDK](https://dot.net/) to compile this solution
+
+Supported platforms: MacOS and Windows
+
+Execute the following command from the root of the repository
+```bash
+dotnet build
+```
