@@ -1,4 +1,4 @@
-name: .NET Desktop CI
+name: .NET MAUI Desktop CI
 
 on:
   push:
@@ -13,12 +13,20 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, macos-latest]
+        include:
+          - os: windows-latest
+            rid: win-x64
+          - os: windows-latest
+            rid: win-x86
+          - os: macos-latest
+            rid: osx-x64
+          - os: macos-latest
+            rid: osx-arm64
 
     env:
-      SOLUTION_PATH: Sophiac.sln
-      UI_PROJECT_PATH: src/Sophiac.UI/Sophiac.UI.csproj
-      PUBLISH_DIR: ./publish
+      SOLUTION_PATH: ./Sophiac.sln
+      UI_PROJECT_PATH: ./src/Sophiac.UI/Sophiac.UI.csproj
+      PUBLISH_DIR: ./publish/${{ matrix.rid }}
 
     steps:
       - uses: actions/checkout@v4
@@ -27,7 +35,9 @@ jobs:
         with:
           dotnet-version: 9.0.x
           cache: true
-          include-prerelease: true
+
+      - name: Install MAUI workload
+        run: dotnet workload install maui
 
       - name: Restore
         run: dotnet restore ${{ env.SOLUTION_PATH }}
@@ -36,9 +46,9 @@ jobs:
         run: dotnet build ${{ env.SOLUTION_PATH }} -c Release --no-restore
 
       - name: Publish
-        run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -o ${{ env.PUBLISH_DIR }}
+        run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -o ${{ env.PUBLISH_DIR }} --self-contained false
 
       - uses: actions/upload-artifact@v4
         with:
-          name: app-${{ matrix.os }}
+          name: app-${{ matrix.rid }}
           path: ${{ env.PUBLISH_DIR }}/*
