@@ -57,8 +57,11 @@
 
     <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.19041'">
       <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
-      <PackageReference Include="Microsoft.NETCore.App.Runtime.Mono.win-x64" Version="9.0.0-preview.7.24405.7" />
     </PropertyGroup>
+    
+    <ItemGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.19041'">
+      <PackageReference Include="Microsoft.NETCore.App.Runtime.Mono.win-x64" Version="9.0.0-preview.7.24405.7" />
+    </ItemGroup>
     
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-windows10.0.19041.0|AnyCPU'">
       <CreatePackage>false</CreatePackage>
