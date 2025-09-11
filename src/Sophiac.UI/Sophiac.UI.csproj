@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFrameworks>net9.0-windows10.0.19041;net9.0-maccatalyst</TargetFrameworks>
-        <RuntimeIdentifiers>win-x64;win-x86;maccatalyst-arm64</RuntimeIdentifiers>
         <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
         <SelfContained>true</SelfContained>
         <SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
