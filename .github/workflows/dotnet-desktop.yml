@@ -19,9 +19,9 @@ jobs:
           - os: windows-latest
             rid: win-x86
             framework: net9.0-windows10.0.19041
-          - os: macos-latest
-            rid: maccatalyst-arm64
-            framework: net9.0-maccatalyst
+          # - os: macos-latest
+          #   rid: maccatalyst-arm64
+          #   framework: net9.0-maccatalyst
 
     env:
       SOLUTION_PATH: "./Sophiac.sln"
@@ -42,8 +42,12 @@ jobs:
       - name: Update MAUI workload
         run: dotnet workload update
 
+      - name: Restore
+        run: msbuild /t:restore /p:TargetFramework=net9.0-windows10.0.19041.0 /p:RuntimeIdentifier=win10-x64
+
       - name: Publish
-        run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -f ${{ matrix.framework }} -o ${{ env.PUBLISH_DIR }} --self-contained true -p:PublishTrimmed=true
+        # run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -f ${{ matrix.framework }} -o ${{ env.PUBLISH_DIR }} --self-contained true -p:PublishTrimmed=true
+        run: msbuild /t:publish /p:TargetFramework=net9.0-windows10.0.19041.0 /p:RuntimeIdentifier=win10-x64 /p:SelfContained=True
 
       - uses: actions/upload-artifact@v4
         with:
