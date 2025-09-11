@@ -13,17 +13,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <EnableDefaultCssItems>false</EnableDefaultCssItems>
         <Nullable>enable</Nullable>
-        <MtouchUseLlvm>False</MtouchUseLlvm>
-        <AotAssemblies>True</AotAssemblies>
-        <UseInterpreter>true</UseInterpreter>
 
-        <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.19041'">
-          <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
-        </PropertyGroup>
-
-        <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-maccatalyst'">
-          <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
-        </PropertyGroup>
+        
 
         <!-- Display name -->
         <ApplicationTitle>Sophiac</ApplicationTitle>
@@ -45,6 +36,17 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.19041'">
+      <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-maccatalyst'">
+      <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
+      <MtouchUseLlvm>False</MtouchUseLlvm>
+      <AotAssemblies>True</AotAssemblies>
+      <UseInterpreter>true</UseInterpreter>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-ios|AnyCPU'">
