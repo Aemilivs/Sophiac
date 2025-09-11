@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     tags:
-      - 'v*.*.*'  # trigger on semantic version tags
+      - 'v*.*.*'
   pull_request:
     branches: [main]
   release:
@@ -46,7 +46,7 @@ jobs:
         run: dotnet restore -r ${{matrix.rid}} ${{ env.SOLUTION_PATH }}
 
       - name: Publish
-        run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -f ${{ matrix.framework }} -o ${{ env.PUBLISH_DIR }} --self-contained false
+        run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -f ${{ matrix.framework }} -o ${{ env.PUBLISH_DIR }} --self-contained true
 
       - uses: actions/upload-artifact@v4
         with:
