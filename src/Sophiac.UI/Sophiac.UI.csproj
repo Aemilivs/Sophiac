@@ -57,6 +57,7 @@
 
     <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-windows10.0.19041'">
       <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
+      <PackageReference Include="Microsoft.NETCore.App.Runtime.Mono.win-x64" Version="9.0.0-preview.7.24405.7" />
     </PropertyGroup>
     
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-windows10.0.19041.0|AnyCPU'">
@@ -98,6 +99,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Sophiac.Infrastructure\Sophiac.Infrastructure.csproj" />
+      <ProjectReference Include="..\Sophiac.Application\Sophiac.Application.csproj" />
     </ItemGroup>
     <ItemGroup>
       <None Remove="Answers\" />
