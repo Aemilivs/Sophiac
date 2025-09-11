@@ -23,9 +23,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 9.0.x
+          cache: true
+          include-prerelease: true
 
       - name: Restore
         run: dotnet restore ${{ env.SOLUTION_PATH }}
