@@ -43,11 +43,10 @@ jobs:
         run: dotnet workload update
 
       - name: Restore
-        run: msbuild /t:restore /p:TargetFramework=net9.0-windows10.0.19041.0 /p:RuntimeIdentifier=win10-x64
+        run: dotnet restore ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -f ${{ matrix.framework }} -o ${{ env.PUBLISH_DIR }}
 
       - name: Publish
-        # run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -f ${{ matrix.framework }} -o ${{ env.PUBLISH_DIR }} --self-contained true -p:PublishTrimmed=true
-        run: msbuild /t:publish /p:TargetFramework=net9.0-windows10.0.19041.0 /p:RuntimeIdentifier=win10-x64 /p:SelfContained=True
+        run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -f ${{ matrix.framework }} -o ${{ env.PUBLISH_DIR }} --self-contained true -p:PublishTrimmed=true
 
       - uses: actions/upload-artifact@v4
         with:
