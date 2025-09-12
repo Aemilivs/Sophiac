@@ -19,9 +19,6 @@ jobs:
           - os: windows-latest
             rid: win-x86
             framework: net8.0-windows10.0.19041
-          # - os: macos-latest
-          #   rid: maccatalyst-arm64
-          #   framework: net8.0-maccatalyst
 
     env:
       SOLUTION_PATH: "./Sophiac.sln"
@@ -60,14 +57,9 @@ jobs:
         with:
           name: Sophiac-win-x86
           path: ./publish/win-x86
-      - uses: actions/download-artifact@v4
-        with:
-          name: Sophiac-maccatalyst-arm64
-          path: ./publish/maccatalyst-arm64
       - uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           files: |
             ./publish/win-x86/Sophiac.UI.exe
-            ./publish/maccatalyst-arm64/Sophiac.UI
