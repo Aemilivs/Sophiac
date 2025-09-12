@@ -40,12 +40,13 @@ jobs:
         run: dotnet restore ${{ env.UI_PROJECT_PATH }} -r ${{ matrix.rid }}
 
       - name: Publish
-        run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -f ${{ matrix.framework }} -o ${{ env.PUBLISH_DIR }} --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:IncludeAllContentForSelfExtract=true
+        run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -f ${{ matrix.framework }} -o ${{ env.PUBLISH_DIR }} --self-contained true -p:PublishTrimmed=true
 
       - uses: actions/upload-artifact@v4
         with:
           name: Sophiac-${{ matrix.rid }}
-          path: ${{ env.PUBLISH_DIR }}/Sophiac.UI*
+          path: ${{ env.PUBLISH_DIR }}/*
+
 
 
   release:
@@ -62,4 +63,4 @@ jobs:
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           files: |
-            ./publish/win-x86/Sophiac.UI.exe
+            ./publish/win-x86/*
