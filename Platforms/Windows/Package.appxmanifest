@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest"
+         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+         xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
+  <Identity Name="com.github.aemilivs.sophiac"
+            Version="1.3.0.0"
+            Publisher="CN=MyCompany, O=MyCompany, L=MyCity, S=MyState, C=MyCountry"/>
+  <Properties>
+    <DisplayName>Sophiac</DisplayName>
+    <PublisherDisplayName>MyCompany</PublisherDisplayName>
+    <Logo>images\icon.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop"
+                        MinVersion="10.0.19041.0"
+                        MaxVersionTested="10.0.18335.0"/>
+  </Dependencies>
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust"/>
+  </Capabilities>
+  <Resources>
+    <Resource Language="en-US"/>
+  </Resources>
+  <Applications>
+    <Application EntryPoint="Windows.FullTrustApplication"
+                 Executable="Sophiac.UI.exe" Id="Sophiac">
+      <uap:VisualElements BackgroundColor="transparent"
+                          DisplayName="Sophiac"
+ 	   Description="A useful description." 
+         Logo="images\icon.png"  
+         SmallLogo="images\small_icon.png" 
+                          ForegroundText="dark"
+                          BackgroundColor="#FFFFFF">
+        <SplashScreen Image="Resources\Splash\splash.svg"/>
+      </uap:VisualElements>
+	<Extensions>
+        <uap:Extension Category="windows.fileTypeAssociation"
+                       EntryPoint="Windows.FullTrustApplication"
+Executable="Sophiac.UI.exe">
+          <uap:FileTypeAssociation Name=".foo">
+    <uap:EditFlags AlwaysUnsafe="false" OpenIsSafe="false"/>
+            <uap:SupportedFileTypes>
+              <uap:FileType>.foo</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+	</Extensions>
+    </Application>
+  </Applications>
+</Package>
