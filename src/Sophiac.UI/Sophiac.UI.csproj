@@ -60,7 +60,8 @@
     </PropertyGroup>
     
     <ItemGroup Condition="'$(TargetFramework)'=='net8.0-windows10.0.19041.0'">
-      <PackageReference Include="Microsoft.NETCore.App.Runtime.Mono.win-x64" Version="9.0.0-preview.7.24405.7" />
+        <UseWindowsDesktopRuntime>true</UseWindowsDesktopRuntime>
+        <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     </ItemGroup>
     
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
