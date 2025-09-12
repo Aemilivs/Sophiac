@@ -56,7 +56,7 @@
     </PropertyGroup>
     
     <ItemGroup Condition="'$(TargetFramework)'=='net8.0-windows10.0.19041.0'">
-        <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
+        <RuntimeIdentifiers Include="win-x86" />
     </ItemGroup>
     
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
