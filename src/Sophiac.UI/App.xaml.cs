@@ -5,6 +5,7 @@ public partial class App : Microsoft.Maui.Controls.Application
 	public App()
 	{
 		InitializeComponent();
+		MainPage = new MainPage();
 	}
 
 	protected override void OnStart()
@@ -13,9 +14,4 @@ public partial class App : Microsoft.Maui.Controls.Application
 		var info = Directory.CreateDirectory(path);
 		base.OnStart();
 	}
-	
-	protected override Window CreateWindow(IActivationState activationState)
-    {
-        return new Window(new MainPage());
-    }
 }
