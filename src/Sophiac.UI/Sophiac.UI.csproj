@@ -54,14 +54,9 @@
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
       <CreatePackage>true</CreatePackage>
     </PropertyGroup>
-
-    <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-windows10.0.19041.0'">
-      <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
-    </PropertyGroup>
     
     <ItemGroup Condition="'$(TargetFramework)'=='net8.0-windows10.0.19041.0'">
-        <UseWindowsDesktopRuntime>true</UseWindowsDesktopRuntime>
-        <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+        <RuntimeIdentifiers>win-x86</RuntimeIdentifiers>
     </ItemGroup>
     
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
