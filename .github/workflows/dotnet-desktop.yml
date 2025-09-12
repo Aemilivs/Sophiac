@@ -40,7 +40,7 @@ jobs:
         run: dotnet restore ${{ env.UI_PROJECT_PATH }} -r ${{ matrix.rid }}
 
       - name: Publish
-        run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -f ${{ matrix.framework }} -o ${{ env.PUBLISH_DIR }} --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:IncludeSymbolsInSingleFile=true -p:IncludeAllContentForSelfExtract=true
+        run: dotnet publish ${{ env.UI_PROJECT_PATH }} -c Release -r ${{ matrix.rid }} -f ${{ matrix.framework }} -o ${{ env.PUBLISH_DIR }} --self-contained true -p:PublishTrimmed=true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:IncludeAllContentForSelfExtract=true
 
       - uses: actions/upload-artifact@v4
         with:
